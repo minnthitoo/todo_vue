@@ -5,15 +5,15 @@
         {{ name }}'ToDo List
       </h1>
       <div class="container">
-        <div class="row">
+        <div class="row mt-3">
           <div class="col">
-
+            <input type="text" name="" class="form-control" id="" v-model="newTask" v-on:keyup.enter="addTask()">
           </div>
           <div class="col">
-            
+            <button class="btn btn-secondary" @click="addTask()">Add</button>
           </div>
         </div>
-        <div class="row">
+        <div class="row my-4">
           <div class="col">Tasks</div>
           <div class="col-2">Done</div>
         </div>
@@ -40,6 +40,7 @@ export default {
   data: () => ({
     name: "Minn Thit Oo",
     hideCompleted : false,
+    newTask : '',
     tasks: [
       {
         actions: "By new phone",
@@ -64,7 +65,18 @@ export default {
       filterTask(){
         return this.hideCompleted ? this.tasks.filter((v)=> !v.done) : this.tasks;
       }
+    },
+  methods : {
+    addTask(){
+      if(this.newTask === ''){
+        alert("Enter task");
+      }else{
+        this.tasks.push({actions : this.newTask, done : false});
+        this.newTask = '';
+      }
     }
+  }
+
 };
 </script>
 <style>
